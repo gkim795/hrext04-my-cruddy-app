@@ -1,11 +1,46 @@
-# MVP
+-- #Plan
+- [] Upload images from local drive
+- [] Add caption bar under the images
+- [] Mouse over to see details
+- [] Status/Priority tags
+- [] Update CSS
+  - [] Fix the layout
+  - [] Update the cursor to change
+  - [] Change background color and font
+  - [] Color Coded priortiy
+
+
+
+  *(5) add due date
+  *(7) time stamps (moment.js)
+  (5) format the display of the items in a list (need to add more detail)
+  (7) fix the layout
+  (7) color coded priority
+  (4)mouse over to see details
+  (7)ability to select and delete multiple items (checkbox?)
+  (4)add status/priorty and allow for sorting based on 
+  (4) status/priority
+  (7) ability to add/leave comments on item
+  (5) upload files/images
+  (5)font changes/choices? (google fonts)
+  (5) show deleted items and allow for undelete
+
+
+
+
+
+
+
+
+
+<!-- # MVP
 - [√] store items
  - [√] create new item
  - [√] select item
  - [√] edit/update item
- - [√] delete item
+ - [√] delete item -->
 
-
+<!-- 
  # Detail Todo
  - [ ] Front End
    - [√] display items
@@ -32,7 +67,7 @@
 
   - [ ] factor out common functionality
   - [ ] testing
-
+ -->
 
   ## Feature list
   * denotes on my to do for the project
@@ -43,6 +78,7 @@
   5 = 3 hours
   7 = 5 hours
   10 = full day + ??
+
 
   *(5) add due date
   *(7) time stamps (moment.js)
@@ -56,7 +92,7 @@
   (4) status/priority
   Item categories
   ability to add/leave comments on item
-  upload files/images
+  (5) upload files/images
   share item
   drag and drop to arrange
   search/filter on keyup/keydown
@@ -68,7 +104,7 @@
   Panic Button
   Highlight based on status/priority/due date
   options page (ability to set/toggle options)
-  show deleted items and allow for undelete
+  (5) show deleted items and allow for undelete
   pagination (if more than 10 show a next button)
   category pages (not really pages, just a show/hide trick)
   strike-through completed/deleted items (styling)
