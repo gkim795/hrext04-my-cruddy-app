@@ -26,7 +26,7 @@
     - [ ] underscore
     - [√] jquery
     - [ ] moment.js
-    - [ ] c3.js (charts.js)
+    - [√] c3.js (charts.js)
 
  ## Next Steps
 
@@ -47,12 +47,13 @@
   *(5) add due date
   *(7) time stamps (moment.js)
   (5) format the display of the items in a list (need to add more detail)
-  (??) fix the layout
+  (7) fix the layout
   (7) color coded priority
   highlight certain items
-  mouse over to see details
-  ability to select and delete multiple items (checkbox?)
-  add status/priorty and allow for sorting based on status/priority
+  (4)mouse over to see details
+  (7)ability to select and delete multiple items (checkbox?)
+  (4)add status/priorty and allow for sorting based on 
+  (4) status/priority
   Item categories
   ability to add/leave comments on item
   upload files/images
@@ -63,7 +64,7 @@
   secret corgi
   delete item confirmation
   fillet edges of boxes
-  font changes/choices? (google fonts)
+  (5)font changes/choices? (google fonts)
   Panic Button
   Highlight based on status/priority/due date
   options page (ability to set/toggle options)
