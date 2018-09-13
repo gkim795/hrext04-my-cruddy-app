@@ -1,4 +1,28 @@
 body {
-    background: pink;
-    color: white;
+    background: white;
+    color: black;
+}
+
+h1{
+    text-align: center;
+}
+
+#input-areas{
+    text-align: center
+}
+
+
+#guest-list{
+    border: 2px dotted black ;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-wrap:wrap;
+    width: 500px;
+    padding: 5px;
+}
+
+#guest-list li{
+    margin: 0 auto;
+    text-align:left;
 }
