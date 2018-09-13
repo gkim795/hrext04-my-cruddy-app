@@ -1,28 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html>
   <head>
     <meta charset="UTF-8">
     <title>My First CRUD App</title>
     <link rel="stylesheet" href="app.css">
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-            crossorigin="anonymous"></script>
-    <script src="app.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.21/c3.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.21/c3.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.21/c3.js
+  "></script>
   </head>
   <body>
+    <h1> Sarah's Wedding </h1>
+    <center>
+      <button id="chart-on" onclick="chartUpdate()">Refresh Chart</button>
+    </center>
+    <div id = "chart">
+      <!--This is where the chart would go-->
+    </div>
 
-  <input type="text" class="user-input-title" placeholder="Enter the Title">
-  <textarea class="user-input-body" placeholder="Enter the body of text"></textarea>
+    <div id="input-areas">
+      <button id="add" onclick="m.addGuest()">Add Guest</button>
+      <input id="add-text" type="text">
+   
+      Update Guest : 
+      <input id="change-text" type="text">
 
-  <button class="add-text-btn">add text</button>
-  <button class="del-text-btn">delete text</button>
-  
-  <div id ="message"></div>
-  <div class="display"></div>
+      <button id="sent-all" onclick="m.clickAll()">Sent All</button>
+    </div>
+    <br>
+    
+    <center>
+    <div id = "guest-list">
+      <ul></ul>
+    </div>
+  </center>
+
+
+  <script src="app.js"></script>
   </body>
 </html>
