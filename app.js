@@ -1,65 +1,186 @@
-$(document).ready(function() {
+  var inviteList = {
+    toInvite: [],
+    removedList: [],
+    addGuest: function(guestName){
+      this.toInvite.push({
+        guestName: guestName,
+        completed: false
+      });
+    },
+    changeGuest: function(position,newGuest){
+      this.toInvite[position].guestName = newGuest;
+    },
+    removeGuest: function(position){
+      var deleted = this.toInvite[position]
+      this.removedList.push(deleted)
+      this.toInvite.splice(position,1);
+    },
+    inviteSent: function(position){
+      var invite = this.toInvite[position];
+      invite.completed = !invite.completed;
+    },
+    clickAll: function (){
+      var sentInvites = 0
+      var totalInvites = this.toInvite.length;
+  
+      this.toInvite.forEach(function(invites){
+        if(invites.completed===true){
+          sentInvites++;
+        }
+      })
+  
+      this.toInvite.forEach(function(invites){
+        if(sentInvites===totalInvites){
+          invites.completed = false;
+        } else {
+          invites.completed = true;
+        }
+      });
+    },
+  };
+  
+  var input = document.getElementById("add-text");
 
+  input.addEventListener("keyup",function(event){
+    if(event.keyCode === 13){
+      document.getElementById("add").click();
+    }
+  },{passive:true});
+  
+  
+  
+  var m = {
+    clickAll: function(){
+      inviteList.clickAll();
+      view.displayGuestList();
+    },
+    addGuest: function(){
+      var input = document.getElementById("add-text");
+      inviteList.addGuest(input.value)
+      input.value = '';
+      view.displayGuestList();
+    },
+    change: function(position){
+      var changeTo = document.getElementById('change-text')
+      inviteList.changeGuest(position, changeTo.value);
+      changeTo.value = '';
+      view.displayGuestList();
+    },
+  
+    delete: function(position){
+      inviteList.removeGuest(position)
+      view.displayGuestList();
+    },
+    sent: function(position){
+      inviteList.inviteSent(position);
+      view.displayGuestList();
+    },
+  };
+  
+  var view = {
+    displayGuestList: function() {
+      var guestListUl = document.querySelector('ul')
+      guestListUl.innerHTML = '';
+  
+      inviteList.toInvite.forEach(function(inviteList,position){
+        var guestli = document.createElement('li')
+        var guestStatus = '';
+  
+        if(inviteList.completed===true){
+          guestStatus = '(x) '+inviteList.guestName;
+        } else {
+          guestStatus = '( ) '+inviteList.guestName;
+        }
+        
+        guestli.id = position;
+        guestli.textContent = guestStatus;
+        guestli.appendChild(this.createDeleteButton());
+        guestli.appendChild(this.createSentButton());
+        guestli.appendChild(this.createEditButton());
+        guestListUl.appendChild(guestli);
+  
+      },this);
+    },
+    
+    createDeleteButton: function() {
+      var deleteButton = document.createElement('button')
+      deleteButton.textContent = 'Delete';
+      deleteButton.className = 'deleteButton'
+      
+      return deleteButton;
+    },
+    createSentButton: function(){
+      var sentButton = document.createElement('button');
+      sentButton.textContent = 'Invite Sent'
+      sentButton.className = 'sentButton'
+  
+      return sentButton;
+    },
+    createEditButton: function(){
+      var editButton = document.createElement('button');
+      editButton.textContent = 'Change to above'
+      editButton.className = 'editButton'
+  
+      return editButton;
+    },
+    
+    setUpEventListeners: function (){
+      var guestListUl = document.querySelector('ul')
+      
+      guestListUl.addEventListener('click',function(event){
+      var elementClicked = event.target;
+      var position = parseInt(elementClicked.parentNode.id)
+  
+      if(elementClicked.className === 'deleteButton'){
+        m.delete(position);
+      } else if (elementClicked.className === 'sentButton'){
+        m.sent(position)
+      } else if (elementClicked.className === 'editButton'){
+        m.change(position)
+      };
+        
+      },{passive:true});
+    }
+  }
+  
+  view.setUpEventListeners();
+  
 
-  $(".add-text-btn").on("click", function(){
+  var chart = null;
+  function chartUpdate (){
+    console.log(inviteList.toInvite)
+    var sent =  0
+    var notsent = 0
 
-    // store values
-    let inputKey = $(".user-input-title").val();
-    let inputValue = $(".user-input-body").val();
+    inviteList.toInvite.forEach(function(invite){
+      if(invite.completed === true){
+        sent ++
+      } else {
+        notsent ++
+      }
 
-    // clear values
-    $(".user-input-title").val("");
-    $(".user-input-body").val("");
-
-    console.log(inputKey, inputValue);
-
-    localStorage.setItem(inputKey, inputValue);
-    // data-
-    let itemHtml = '<div class="display-item" data-storage-key="'+inputKey+'"> ' + inputKey + ' ' +  localStorage.getItem(inputKey) + '</div>';
-    $(".display").html(itemHtml);
-    //console.log(localStorage);
-    // how can we delegate this event to the outer html node?
-    // https://learn.jquery.com/events/event-delegation/
-
-    $(".display-item").on("click", function(e){
-      // plop the key:value back into the input boxes
-
-      // get the values from the the divs?
-      console.log("key=> ", e.target.dataset.storageKey); // user-input-title
-      localStorage.getItem(e.target.dataset.storageKey); // user-input-body
-
-      // set those values in the form fields
-      $(".user-input-title").val(e.target.dataset.storageKey);
-      $(".user-input-body").val(localStorage.getItem(e.target.dataset.storageKey));
     });
 
+    chart = c3.generate({
+      data: {
+          columns: [
+              ['invites sent', sent],
+              ['invites not sent', notsent],
+          ],
+          type : 'donut',
+      },
+      donut: {
+          title: "Guest List Status"
+      }
   });
 
+  }
 
 
-   // TODO add back in later
-   // $(".user-input").on("keyup", function(){
-   //   let inputValue = $(".user-input").val();
-   //   localStorage.setItem("testStorage", inputValue);
-   //   $(".display").text(localStorage.getItem("testStorage"));
-   // });
-
-   $(".del-text-btn").on("click", function() {
-     alert('item deleted? check the console'); // maybe change to a window.confirm
-     localStorage.removeItem( $('.user-input-title').val() ); // grab the title and plop here
-     $(".user-input-title").val("");
-     $(".user-input-body").val("");
-     // clearing display? what if I have multiple items?
-     // after item is removed from local storage, redisplay items from local storage
-     // refresh from storage?
-   });
-
-
-   // iterative approach to adding items
-   // store data as stringified array of objects
-   // store data with individual keys
-  // how do we get keys? research Object.keys
-
-
-
-});
+  function constantUpdate (updatedata){
+    chart.load({
+      columns:updatedata
+    })
+  }
+  
+ 
