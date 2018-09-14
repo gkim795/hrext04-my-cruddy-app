@@ -164,14 +164,19 @@
     chart = c3.generate({
       data: {
           columns: [
-              ['invites sent', sent],
-              ['invites not sent', notsent],
+              ['sent', sent],
+              ['toSend', notsent],
           ],
           type : 'donut',
+          colors: {
+            sent: '90ee90',
+            notSent: '#00ff00',
+          }
       },
       donut: {
           title: "Guest List Status"
-      }
+      },
+      
   });
 
   }

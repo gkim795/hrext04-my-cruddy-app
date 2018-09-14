@@ -1,19 +1,22 @@
 body {
-    background: white;
-    color: black;
+    background-image: url("/flowerBG.jpg");
 }
 
 h1{
     text-align: center;
+    font-family: cursive;
+    font-size: 40px;
 }
 
 #input-areas{
-    text-align: center
+    text-align: center;
+    font-family: cursive;
 }
 
 
 #guest-list{
     border: 2px dotted black ;
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items:center;
